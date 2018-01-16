@@ -1,28 +1,39 @@
 ﻿<mui:ModernWindow x:Class="parserlog.dotnet.ui.MainWindow"
                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                  
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
                   Title=""
                   Style="{StaticResource BlankWindow}" Height="305.225">
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,0">
-                <Grid>
+                <Grid Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="8,8,8,8">
                         <Button Content="Open file" Command="{Binding OpenFileCommand}" Margin="0,0,0,2" />
                     </StackPanel>
-                </Grid>
-            </StackPanel>
+                    <ScrollViewer Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+                        <chart:ClusteredBarChart ChartSubTitle="Population in millions" 
+                                        ChartTitle="Countries by population" Margin="0,0,0,0">
+                            <chart:ClusteredBarChart.Series>
+                                <chart:ChartSeries DisplayMember="Name"
+                                                   ItemsSource="{Binding DataChart}"
+                                                   Caption="World largest populations"
+                                                   ValueMember="Count" />
+                            </chart:ClusteredBarChart.Series>
+                        </chart:ClusteredBarChart>
+                    </ScrollViewer>
+            </Grid>
         </Grid>
     </ScrollViewer>
 </mui:ModernWindow>

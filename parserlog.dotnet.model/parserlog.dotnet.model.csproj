@@ -7,8 +7,8 @@
     <ProjectGuid>{D191ED86-E5A3-479E-99C0-C086E556D538}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>imageanalyzer.dotnet.model</RootNamespace>
-    <AssemblyName>imageanalyzer.dotnet.model</AssemblyName>
+    <RootNamespace>parserlog.dotnet.model</RootNamespace>
+    <AssemblyName>parserlog.dotnet.model</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
