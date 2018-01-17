@@ -8,13 +8,10 @@ namespace parserlog.dotnet.ui.view_model
     {
         public ViewModel()
         {
+            log_name = "";
             OpenFileCommand = new command.OpenFileCommand(this);
             data_chart = new ObservableCollection<ChartElement>();
-            data_chart.Add(new ChartElement() { Name = "China", Count = 1340 });
-            data_chart.Add(new ChartElement() { Name = "India", Count = 1220 });
-            data_chart.Add(new ChartElement() { Name = "United States", Count = 309 });
-            data_chart.Add(new ChartElement() { Name = "Indonesia", Count = 240 });
-
+            Operations = new ObservableCollectionDisp<OperationView>();
         }
 
         public string LogName
@@ -39,7 +36,20 @@ namespace parserlog.dotnet.ui.view_model
             }
         }
 
+        public ObservableCollectionDisp<OperationView> Operations
+        {
+            get
+            {
+                return operations;
+            }
+            set
+            {
+                operations = value;
+                NotifyPropertyChanged("Operations");
+            }
+        }
 
+        private ObservableCollectionDisp<OperationView> operations;
         private readonly ObservableCollection<ChartElement> data_chart;
         private string log_name;
     }

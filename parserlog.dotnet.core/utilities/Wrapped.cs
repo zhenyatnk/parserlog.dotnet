@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace parserlog.dotnet.model.utilities
+﻿namespace parserlog.dotnet.core.utilities
 {
     public class Wrapped<T>
     {

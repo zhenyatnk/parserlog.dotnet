@@ -11,6 +11,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
                 <Grid Margin="0,0,0,0">
@@ -23,17 +24,29 @@
                         <Button Content="Open file" Command="{Binding OpenFileCommand}" Margin="0,0,0,2" />
                     </StackPanel>
                     <ScrollViewer Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
-                        <chart:ClusteredBarChart ChartSubTitle="Population in millions" 
-                                        ChartTitle="Countries by population" Margin="0,0,0,0">
+                        <chart:ClusteredBarChart ChartTitle="Статистика файла" Margin="0,0,0,0"
+                                                 ChartSubTitle="" >
                             <chart:ClusteredBarChart.Series>
                                 <chart:ChartSeries DisplayMember="Name"
                                                    ItemsSource="{Binding DataChart}"
-                                                   Caption="World largest populations"
+                                                   Caption="Количество строк"
                                                    ValueMember="Count" />
                             </chart:ClusteredBarChart.Series>
                         </chart:ClusteredBarChart>
                     </ScrollViewer>
             </Grid>
+            <StackPanel Name="StatusStack" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <ItemsControl ItemsSource="{Binding Operations}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Title}"  HorizontalAlignment="Center"/>
+                                <ProgressBar Width="350" Height="5" Minimum="0" Maximum="100" Value="{Binding Progress}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
         </Grid>
     </ScrollViewer>
 </mui:ModernWindow>

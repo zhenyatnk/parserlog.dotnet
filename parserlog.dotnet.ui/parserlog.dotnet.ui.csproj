@@ -113,10 +113,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Notifier.cs" />
+    <Compile Include="view_model\command\CancelCommand.cs" />
     <Compile Include="view_model\command\OpenFileCommand.cs" />
     <Compile Include="view_model\ChartElement.cs" />
     <Compile Include="view_model\MultiSortedList.cs" />
     <Compile Include="view_model\ObservableCollectionDisp.cs" />
+    <Compile Include="view_model\OperationView.cs" />
     <Compile Include="view_model\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +135,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\parserlog.dotnet.core\parserlog.dotnet.core.csproj">
+      <Project>{d191ed86-e5a3-479e-99c0-c086e556d538}</Project>
+      <Name>parserlog.dotnet.core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
