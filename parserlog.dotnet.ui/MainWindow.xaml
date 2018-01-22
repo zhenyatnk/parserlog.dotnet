@@ -22,7 +22,8 @@
 
                     <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="8,8,8,8">
                         <Button Content="Open file" Command="{Binding OpenFileCommand}" Margin="0,0,0,2" />
-                    </StackPanel>
+                        <Button Content="Analyze" Command="{Binding AnalyzeLogCommand}" Margin="0,0,0,2" />
+                </StackPanel>
                     <ScrollViewer Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
                         <chart:ClusteredBarChart ChartTitle="Статистика файла" Margin="0,0,0,0"
                                                  ChartSubTitle="" >

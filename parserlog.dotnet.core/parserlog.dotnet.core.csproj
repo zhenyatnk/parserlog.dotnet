@@ -84,7 +84,9 @@
   <ItemGroup>
     <Compile Include="interface\IOperation.cs" />
     <Compile Include="model\LineInfo.cs" />
+    <Compile Include="model\ThreadInfo.cs" />
     <Compile Include="operations\OperationCountLines.cs" />
+    <Compile Include="operations\OperationParserLines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utilities\Wrapped.cs" />
   </ItemGroup>

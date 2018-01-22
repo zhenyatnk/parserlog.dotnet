@@ -26,7 +26,7 @@ namespace parserlog.dotnet.core.interfaces
 
     public class OnParsedLineEventArgs : EventArgs
     {
-        public double Progress { get; set; }
+        public model.LineInfo Info { get; set; }
     }
     public interface IOperationParse
         : IOperation

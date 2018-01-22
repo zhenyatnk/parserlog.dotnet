@@ -113,7 +113,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Notifier.cs" />
+    <Compile Include="view_model\command\AnalyzeLogCommand.cs" />
     <Compile Include="view_model\command\CancelCommand.cs" />
+    <Compile Include="view_model\command\CountLinesCommand.cs" />
     <Compile Include="view_model\command\OpenFileCommand.cs" />
     <Compile Include="view_model\ChartElement.cs" />
     <Compile Include="view_model\MultiSortedList.cs" />
