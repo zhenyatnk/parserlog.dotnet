@@ -12,9 +12,11 @@ namespace parserlog.dotnet.ui.view_model
             log_name = "";
             OpenFileCommand = new command.OpenFileCommand(this);
             AnalyzeLogCommand = new command.AnalyzeLogCommand(this);
+            AnalyzeThreadCommand = new command.AnalyzeThreadCommand(this);
             CountLinesCommand = new command.CountLinesCommand(this);
 
             data_chart = new ObservableCollectionDisp<ChartElement>();
+            thread_chart = new ObservableCollectionDisp<ChartElement>();
             Operations = new ObservableCollectionDisp<OperationView>();
 
             lines = new MultiSortedList<ulong, core.model.LineInfo>();
@@ -33,15 +35,42 @@ namespace parserlog.dotnet.ui.view_model
                 NotifyPropertyChanged("LogName");
             }
         }
+        public string ThreadID
+        {
+            get
+            {
+                return thread_id;
+            }
+            set
+            {
+                thread_id = value;
+                NotifyPropertyChanged("ThreadID");
+                AnalyzeThreadCommand.Execute(null);
+            }
+        }
 
         public command.OpenFileCommand OpenFileCommand { get; set; }
         public command.CountLinesCommand CountLinesCommand { get; set; }
         public command.AnalyzeLogCommand AnalyzeLogCommand { get; set; }
+        public command.AnalyzeThreadCommand AnalyzeThreadCommand { get; set; }
         public ObservableCollectionDisp<ChartElement> DataChart
         {
             get
             {
                 return data_chart;
+            }
+        }
+
+        public ObservableCollectionDisp<ChartElement> ThreadChart
+        {
+            get
+            {
+                return thread_chart;
+            }
+            set
+            {
+                thread_chart = value;
+                NotifyPropertyChanged("ThreadChart");
             }
         }
 
@@ -88,6 +117,9 @@ namespace parserlog.dotnet.ui.view_model
         private MultiSortedList<ulong, core.model.LineInfo> lines;
         private SortedList<ulong, core.model.ThreadInfo> threads;
         private readonly ObservableCollectionDisp<ChartElement> data_chart;
+        private ObservableCollectionDisp<ChartElement> thread_chart;
         private string log_name;
+        private string thread_id;
+
     }
 }

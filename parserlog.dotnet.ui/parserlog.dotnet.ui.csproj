@@ -113,6 +113,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Notifier.cs" />
+    <Compile Include="Pages\GraphicsPage.xaml.cs">
+      <DependentUpon>GraphicsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view_model\command\AnalyzeThreadCommand.cs" />
     <Compile Include="view_model\command\AnalyzeLogCommand.cs" />
     <Compile Include="view_model\command\CancelCommand.cs" />
     <Compile Include="view_model\command\CountLinesCommand.cs" />
@@ -131,6 +138,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="Pages\GraphicsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -5,49 +5,15 @@
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                  
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                   xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+                  ContentSource="/Pages/MainPage.xaml"
                   Title=""
-                  Style="{StaticResource BlankWindow}" Height="305.225">
-    <ScrollViewer>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-
-                <Grid Margin="0,0,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="8,8,8,8">
-                        <Button Content="Open file" Command="{Binding OpenFileCommand}" Margin="0,0,0,2" />
-                        <Button Content="Analyze" Command="{Binding AnalyzeLogCommand}" Margin="0,0,0,2" />
-                </StackPanel>
-                    <ScrollViewer Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
-                        <chart:ClusteredBarChart ChartTitle="Статистика файла" Margin="0,0,0,0"
-                                                 ChartSubTitle="" >
-                            <chart:ClusteredBarChart.Series>
-                                <chart:ChartSeries DisplayMember="Name"
-                                                   ItemsSource="{Binding DataChart}"
-                                                   Caption="Количество строк"
-                                                   ValueMember="Count" />
-                            </chart:ClusteredBarChart.Series>
-                        </chart:ClusteredBarChart>
-                    </ScrollViewer>
-            </Grid>
-            <StackPanel Name="StatusStack" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <ItemsControl ItemsSource="{Binding Operations}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                                <TextBlock Text="{Binding Title}"  HorizontalAlignment="Center"/>
-                                <ProgressBar Width="350" Height="5" Minimum="0" Maximum="100" Value="{Binding Progress}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </Grid>
-    </ScrollViewer>
+                  Width="800" Height="700">
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="Parserlog.Dotnet">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Основная" Source="/Pages/MainPage.xaml" />
+                <mui:Link DisplayName="График потока" Source="/Pages/GraphicsPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
 </mui:ModernWindow>

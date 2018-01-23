@@ -16,8 +16,8 @@ namespace parserlog.dotnet.ui.view_model
     public class MultiSortedList<TKey, TValue>
 		: IEnumerable<KeyValuePair<TKey, TValue>>, 
 		IEnumerator<KeyValuePair<TKey, TValue>>
-	{
-		public MultiSortedList()
+    {
+        public MultiSortedList()
 		{
 			container = new SortedList<TKey, List<TValue>>();
 			rewind = true;
@@ -31,7 +31,21 @@ namespace parserlog.dotnet.ui.view_model
         public void Dispose()
 		{ }
 
-		public void Add(TKey key, TValue value)
+        public bool ContainsKey(TKey key)
+        {
+            return container.ContainsKey(key);
+        }
+
+        public List<TValue> this[TKey key]
+        {
+            get { return container[key]; }
+            set
+            {
+                container[key] = value;
+            }
+        }
+
+        public void Add(TKey key, TValue value)
 		{
 			if (container.ContainsKey(key))
 				container[key].Add(value);

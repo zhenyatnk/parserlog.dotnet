@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="parserlog.dotnet.ui.Pages.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <ScrollViewer>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="8,8,8,8">
+                        <Button Content="Open file" Command="{Binding OpenFileCommand}" Margin="0,0,0,2" />
+                        <Button Content="Analyze" Command="{Binding AnalyzeLogCommand}" Margin="0,0,0,2" />
+                    </StackPanel>
+                    <ScrollViewer Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+                        <chart:ClusteredBarChart ChartTitle="Статистика файла" Margin="0,0,0,0"
+                                                 ChartSubTitle="" >
+                            <chart:ClusteredBarChart.Series>
+                                <chart:ChartSeries DisplayMember="Name"
+                                                   ItemsSource="{Binding DataChart}"
+                                                   Caption="Количество строк"
+                                                   ValueMember="Count" />
+                            </chart:ClusteredBarChart.Series>
+                        </chart:ClusteredBarChart>
+                    </ScrollViewer>
+                </Grid>
+                <StackPanel Name="StatusStack" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <ItemsControl ItemsSource="{Binding Operations}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Title}"  HorizontalAlignment="Center"/>
+                                    <ProgressBar Width="350" Height="3" Minimum="0" Maximum="100" Value="{Binding Progress}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

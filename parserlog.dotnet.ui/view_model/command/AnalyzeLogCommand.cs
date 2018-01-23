@@ -24,7 +24,7 @@ namespace parserlog.dotnet.ui.view_model.command
                 timer.Stop();
 
             timer = new System.Timers.Timer(1500);
-            timer.Elapsed += (source, e) => 
+            timer.Elapsed += (source, e) =>
             {
                 var i = 0;
                 MultiSortedList<ulong, ulong> byCount = new MultiSortedList<ulong, ulong>(new CompareReverse<ulong>());
@@ -45,34 +45,11 @@ namespace parserlog.dotnet.ui.view_model.command
             timer.Enabled = true;
 
             OperationView operation_view = new OperationView(model_view.Operations, cancel);
-            analyze_log.OnStart += (sender, e) => { operation_view.Title = "Analyzing oog file"; };
+            analyze_log.OnStart += (sender, e) => { operation_view.Title = "Parsing log file.."; model_view.Lines = new MultiSortedList<ulong, core.model.LineInfo>(); };
             analyze_log.OnProgress += (sender, e) => { operation_view.Progress = e.Progress; };
-            analyze_log.OnParsedLine += (sender, e) => 
+            analyze_log.OnParsedLine += (sender, e) =>
             {
-                if (!model_view.Threads.ContainsKey(e.Info.m_ThreadId))
-                {
-                    core.model.ThreadInfo thread = new core.model.ThreadInfo()
-                    {
-                        m_Id = e.Info.m_ThreadId,
-                        m_TimeStart = e.Info.m_TimeStamp,
-                        m_TimeEnd = e.Info.m_TimeStamp,
-                        m_Count = 1,
-                        m_Component = new SortedList<string, ulong>()
-                    };
-                    thread.m_Component.Add(e.Info.m_Component, 1);
-
-                    model_view.Threads.Add(e.Info.m_ThreadId, thread);
-                }
-                else
-                {
-                    var thread = model_view.Threads[e.Info.m_ThreadId];
-                    ++thread.m_Count;
-                    thread.m_TimeEnd = e.Info.m_TimeStamp;
-                    if(!thread.m_Component.ContainsKey(e.Info.m_Component))
-                        thread.m_Component.Add(e.Info.m_Component, 1);
-                    else
-                        ++thread.m_Component[e.Info.m_Component];
-                }
+                model_view.Lines.Add(e.Info.m_ThreadId, e.Info);
             };
             analyze_log.OnError += (sender, e) => { operation_view.Complete = true; };
             analyze_log.OnComplete += (sender, e) =>
@@ -80,12 +57,25 @@ namespace parserlog.dotnet.ui.view_model.command
                 timer.Stop();
                 var i = 0;
                 operation_view.Complete = true;
-                MultiSortedList<ulong, ulong> byCount = new MultiSortedList<ulong, ulong>(new CompareReverse<ulong>());
-                foreach (var thread in model_view.Threads)
-                    byCount.Add(thread.Value.m_Count, thread.Key);
-
-                    foreach (var thread in byCount)
+                SortedList<ulong, ulong> sumThread = new SortedList<ulong, ulong>();
+                foreach (var thread in model_view.Lines)
                 {
+                    if(sumThread.ContainsKey(thread.Key))
+                        ++sumThread[thread.Key];
+                    else
+                        sumThread.Add(thread.Key, 1);
+                }
+
+                MultiSortedList<ulong, ulong> byCount = new MultiSortedList<ulong, ulong>(new CompareReverse<ulong>());
+                foreach (var thread in sumThread)
+                {
+                    byCount.Add(thread.Value, thread.Key);
+                }
+
+                foreach (var thread in byCount)
+                {
+                    if (i == 0)
+                        model_view.ThreadID = thread.Value.ToString();
                     model_view.DataChart.Add(new ChartElement() { Name = thread.Value.ToString(), Count = (int)thread.Key });
                     if (i++ > 20)
                         break;
