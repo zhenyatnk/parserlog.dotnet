@@ -28,7 +28,7 @@ namespace parserlog.dotnet.ui.view_model.command
             {
                 var i = 0;
                 MultiSortedList<ulong, ulong> byCount = new MultiSortedList<ulong, ulong>(new CompareReverse<ulong>());
-                foreach (var thread in model_view.Threads)
+                foreach (var thread in model_view.ThreadsInfo)
                     byCount.Add(thread.Value.m_Count, thread.Key);
 
                 model_view.DataChart.dispatcher.Invoke(new Action(() => { model_view.DataChart.Clear(); }));
@@ -67,6 +67,7 @@ namespace parserlog.dotnet.ui.view_model.command
                 }
 
                 MultiSortedList<ulong, ulong> byCount = new MultiSortedList<ulong, ulong>(new CompareReverse<ulong>());
+                model_view.Threads.Clear();
                 foreach (var thread in sumThread)
                 {
                     byCount.Add(thread.Value, thread.Key);
@@ -76,9 +77,10 @@ namespace parserlog.dotnet.ui.view_model.command
                 {
                     if (i == 0)
                         model_view.ThreadID = thread.Value.ToString();
-                    model_view.DataChart.Add(new ChartElement() { Name = thread.Value.ToString(), Count = (int)thread.Key });
-                    if (i++ > 20)
-                        break;
+                    if (i++ < 20)
+                        model_view.DataChart.Add(new ChartElement() { Name = thread.Value.ToString(), Count = (int)thread.Key });
+
+                    model_view.Threads.Add(thread.Value);
                 }
 
             };

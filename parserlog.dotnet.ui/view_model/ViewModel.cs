@@ -16,11 +16,12 @@ namespace parserlog.dotnet.ui.view_model
             CountLinesCommand = new command.CountLinesCommand(this);
 
             data_chart = new ObservableCollectionDisp<ChartElement>();
+            threads = new List<ulong>();
             thread_chart = new ObservableCollectionDisp<ChartElement>();
             Operations = new ObservableCollectionDisp<OperationView>();
 
             lines = new MultiSortedList<ulong, core.model.LineInfo>();
-            threads = new SortedList<ulong, core.model.ThreadInfo>();
+            threads_info = new SortedList<ulong, core.model.ThreadInfo>();
         }
 
         public string LogName
@@ -100,7 +101,19 @@ namespace parserlog.dotnet.ui.view_model
             }
         }
 
-        public SortedList<ulong, core.model.ThreadInfo> Threads
+        public SortedList<ulong, core.model.ThreadInfo> ThreadsInfo
+        {
+            get
+            {
+                return threads_info;
+            }
+            set
+            {
+                threads_info = value;
+                NotifyPropertyChanged("ThreadsInfo");
+            }
+        }
+        public List<ulong> Threads
         {
             get
             {
@@ -115,7 +128,8 @@ namespace parserlog.dotnet.ui.view_model
 
         private ObservableCollectionDisp<OperationView> operations;
         private MultiSortedList<ulong, core.model.LineInfo> lines;
-        private SortedList<ulong, core.model.ThreadInfo> threads;
+        private SortedList<ulong, core.model.ThreadInfo> threads_info;
+        private List<ulong> threads;
         private readonly ObservableCollectionDisp<ChartElement> data_chart;
         private ObservableCollectionDisp<ChartElement> thread_chart;
         private string log_name;

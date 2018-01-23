@@ -18,9 +18,9 @@ namespace parserlog.dotnet.ui.Pages
     /// <summary>
     /// Interaction logic for Introduction.xaml
     /// </summary>
-    public partial class GraphicsPage : UserControl
+    public partial class ThreadsPage : UserControl
     {
-        public GraphicsPage()
+        public ThreadsPage()
         {
             InitializeComponent();
         }

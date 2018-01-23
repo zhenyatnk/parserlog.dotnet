@@ -113,8 +113,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Notifier.cs" />
-    <Compile Include="Pages\GraphicsPage.xaml.cs">
-      <DependentUpon>GraphicsPage.xaml</DependentUpon>
+    <Compile Include="Pages\ThreadsPage.xaml.cs">
+      <DependentUpon>ThreadsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -138,7 +138,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Page Include="Pages\GraphicsPage.xaml">
+    <Page Include="Pages\ThreadsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

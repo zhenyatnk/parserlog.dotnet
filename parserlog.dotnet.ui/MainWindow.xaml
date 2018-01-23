@@ -12,7 +12,7 @@
         <mui:LinkGroup DisplayName="Parserlog.Dotnet">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="Основная" Source="/Pages/MainPage.xaml" />
-                <mui:Link DisplayName="График потока" Source="/Pages/GraphicsPage.xaml" />
+                <mui:Link DisplayName="Потоки" Source="/Pages/ThreadsPage.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
     </mui:ModernWindow.MenuLinkGroups>
