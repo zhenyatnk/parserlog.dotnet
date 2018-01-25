@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -25,15 +25,11 @@
                 </ListBox>
 
                 <ScrollViewer  Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
-                    <chart:ClusteredColumnChart ChartTitle="Статистика потока"
-                                                    ChartSubTitle="{Binding ThreadID}" >
-                        <chart:ClusteredColumnChart.Series>
-                            <chart:ChartSeries DisplayMember="Name"
-                                                   ItemsSource="{Binding ThreadChart}"
-                                                   Caption="Количество строк"
-                                                   ValueMember="Count" />
-                        </chart:ClusteredColumnChart.Series>
-                    </chart:ClusteredColumnChart>
+                    <lvc:CartesianChart Grid.Row="1" DisableAnimations="True"
+                            Series="{Binding Series}" 
+                            DataTooltip="{x:Null}"
+                            AnimationsSpeed="0:0:0.15"
+                            Zoom="Xy"/>
                 </ScrollViewer>
 
             </Grid>

@@ -31,13 +31,16 @@ namespace parserlog.dotnet.core.operations
             {
                 try
                 {
-                    var count_lines = linesThread.Count;
+                    var temp = linesThread.ToArray();
+                    var count_lines = temp.Length;
                     var index = 0;
-                    foreach (var line in linesThread)
+                    foreach (var line in temp)
                     {
                         ++index;
                         OnParsedLine(this, new interfaces.OnParsedLineEventArgs() { Info = line });
                         OnProgress(this, new interfaces.OnProgressEventArgs() { Progress = (100.0 * index) / count_lines });
+                        if (cancel.IsCancellationRequested)
+                            break;
                     }
                 }
                 catch (SystemException e)

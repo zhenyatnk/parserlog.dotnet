@@ -4,7 +4,6 @@
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"                  
                   xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-                  xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
                   ContentSource="/Pages/MainPage.xaml"
                   Title=""
                   Width="800" Height="700">

@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using LiveCharts;
 
 namespace parserlog.dotnet.ui.view_model
 {
@@ -11,17 +12,18 @@ namespace parserlog.dotnet.ui.view_model
         {
             log_name = "";
             OpenFileCommand = new command.OpenFileCommand(this);
-            AnalyzeLogCommand = new command.AnalyzeLogCommand(this);
+            ParseLogCommand = new command.ParseLogCommand(this);
             AnalyzeThreadCommand = new command.AnalyzeThreadCommand(this);
+            AnalyzeMainCommand = new command.AnalyzeMainCommand(this);
             CountLinesCommand = new command.CountLinesCommand(this);
 
-            data_chart = new ObservableCollectionDisp<ChartElement>();
             threads = new List<ulong>();
-            thread_chart = new ObservableCollectionDisp<ChartElement>();
             Operations = new ObservableCollectionDisp<OperationView>();
 
-            lines = new MultiSortedList<ulong, core.model.LineInfo>();
-            threads_info = new SortedList<ulong, core.model.ThreadInfo>();
+            Series = new SeriesCollection();
+            SeriesMainPage = new SeriesCollection();
+            linesByThread = new MultiSortedList<ulong, core.model.LineInfo>();
+            lines = new List<core.model.LineInfo>();
         }
 
         public string LogName
@@ -52,28 +54,9 @@ namespace parserlog.dotnet.ui.view_model
 
         public command.OpenFileCommand OpenFileCommand { get; set; }
         public command.CountLinesCommand CountLinesCommand { get; set; }
-        public command.AnalyzeLogCommand AnalyzeLogCommand { get; set; }
+        public command.ParseLogCommand ParseLogCommand { get; set; }
         public command.AnalyzeThreadCommand AnalyzeThreadCommand { get; set; }
-        public ObservableCollectionDisp<ChartElement> DataChart
-        {
-            get
-            {
-                return data_chart;
-            }
-        }
-
-        public ObservableCollectionDisp<ChartElement> ThreadChart
-        {
-            get
-            {
-                return thread_chart;
-            }
-            set
-            {
-                thread_chart = value;
-                NotifyPropertyChanged("ThreadChart");
-            }
-        }
+        public command.AnalyzeMainCommand AnalyzeMainCommand { get; set; }
 
         public ObservableCollectionDisp<OperationView> Operations
         {
@@ -88,7 +71,20 @@ namespace parserlog.dotnet.ui.view_model
             }
         }
 
-        public MultiSortedList<ulong, core.model.LineInfo> Lines
+        public MultiSortedList<ulong, core.model.LineInfo> LinesByThread
+        {
+            get
+            {
+                return linesByThread;
+            }
+            set
+            {
+                linesByThread = value;
+                NotifyPropertyChanged("LinesByThread");
+            }
+        }
+
+        public List<core.model.LineInfo> Lines
         {
             get
             {
@@ -101,18 +97,6 @@ namespace parserlog.dotnet.ui.view_model
             }
         }
 
-        public SortedList<ulong, core.model.ThreadInfo> ThreadsInfo
-        {
-            get
-            {
-                return threads_info;
-            }
-            set
-            {
-                threads_info = value;
-                NotifyPropertyChanged("ThreadsInfo");
-            }
-        }
         public List<ulong> Threads
         {
             get
@@ -126,12 +110,13 @@ namespace parserlog.dotnet.ui.view_model
             }
         }
 
+        public SeriesCollection Series { get; set; }
+        public SeriesCollection SeriesMainPage { get; set; }
+
         private ObservableCollectionDisp<OperationView> operations;
-        private MultiSortedList<ulong, core.model.LineInfo> lines;
-        private SortedList<ulong, core.model.ThreadInfo> threads_info;
+        private MultiSortedList<ulong, core.model.LineInfo> linesByThread;
+        private List<core.model.LineInfo> lines;
         private List<ulong> threads;
-        private readonly ObservableCollectionDisp<ChartElement> data_chart;
-        private ObservableCollectionDisp<ChartElement> thread_chart;
         private string log_name;
         private string thread_id;
 

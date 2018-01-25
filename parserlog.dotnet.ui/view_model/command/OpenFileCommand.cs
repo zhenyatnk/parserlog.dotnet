@@ -19,7 +19,12 @@ namespace parserlog.dotnet.ui.view_model.command
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Log name|*.log";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                foreach (var operation in model_view.Operations)
+                    operation.CancelCommand.Execute(null);
                 model_view.LogName = dialog.FileName;
+                model_view.ParseLogCommand.Execute(null);                
+            }
         }
 		public bool CanExecute(object parameter)
 		{
